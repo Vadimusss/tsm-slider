@@ -1,11 +1,25 @@
+/** @jsx jsx */
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
-import styled from '@emotion/styled';
+import { css, jsx } from '@emotion/core';
 
-const SlidesWrapper = styled.div`
-  transform: translateX(-${props => props.translate}px);
-  transition: transform ease-out ${props => props.transition}s;
-  height: 100%;
-  width: ${props => props.width}px;
-  display: flex;
-`
+const SlidesWrapper = ({
+  translate,
+  transition,
+  width,
+  children,
+}) => (
+  <div
+    css={css`
+      transform: translateX(-${translate}px);
+      transition: transform ease-out ${transition}s;
+      height: 100%;
+      width: ${width}px;
+      display: flex;
+    `}
+  >
+    {children}
+  </div>
+);
+
 export default SlidesWrapper;
