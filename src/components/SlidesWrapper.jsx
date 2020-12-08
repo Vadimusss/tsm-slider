@@ -10,6 +10,7 @@ const SlidesWrapper = ({
   children,
 }) => (
   <div
+    className="SlidesWrapper"
     css={css`
       transform: translateX(-${translate}px);
       transition: transform ease-out ${transition}s;
