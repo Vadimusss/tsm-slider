@@ -2,6 +2,7 @@
 /** @jsx jsx */
 import { useState, useEffect, useRef } from 'react';
 import { css, jsx } from '@emotion/core';
+import { uniqBy } from 'lodash';
 import SlidesWrapper from './SlidesWrapper.jsx';
 import Slide from './Slide.jsx';
 import Arrow from './Arrow.jsx';
@@ -17,12 +18,13 @@ const Slider = (props) => {
   const lastSlide = slides[slides.length - 1];
   const [state, setState] = useState({
     activeSlide: 0,
+    displayedSlideId: firstSlide.id,
     translate: getWidth(),
     transition: 0.45,
     _slides: [lastSlide, firstSlide, secondSlide],
   });
   const {
-    translate, transition, _slides, activeSlide,
+    activeSlide, displayedSlideId, translate, transition, _slides,
   } = state;
 
   const autoPlayRef = useRef();
@@ -42,9 +44,10 @@ const Slider = (props) => {
 
     setState({
       ...state,
-      _slides: newSlides,
+      displayedSlideId: newSlides[1].id,
       transition: 0,
       translate: getWidth(),
+      _slides: newSlides,
     });
   };
 
@@ -115,7 +118,7 @@ const Slider = (props) => {
   const sliderStyles = css`
     position: relative;
     height: 100%;
-    width: 100%;
+    width: ${getWidth()}px;
     margin: 0 auto;
     overflow: hidden;
     white-space: nowrap;
@@ -131,7 +134,7 @@ const Slider = (props) => {
         {_slides.map((slide) => (
           <Slide
             width={getWidth()}
-            key={slide.id}
+            key={slide.key}
             slide={slide}
             containerClass={containerClass}
           />
@@ -140,7 +143,7 @@ const Slider = (props) => {
       <Arrow direction="left" handleClick={prevSlide} />
       <Arrow direction="right" handleClick={nextSlide} />
 
-      {withDots && <Dots slides={slides} activeSlide={activeSlide} />}
+      {withDots && <Dots slides={uniqBy(slides, 'id')} displayedSlideId={displayedSlideId} />}
     </div>
   );
 };
