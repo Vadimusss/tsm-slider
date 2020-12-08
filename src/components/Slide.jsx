@@ -22,9 +22,13 @@ const Slide = ({
       background-position: center;
     `}
   >
-    {slideTitle && <span className={`${containerClass}__slide-title`}>{slideTitle}</span>}
-    {slideDescription && <span className={`${containerClass}__slide-description`}>{slideDescription}</span>}
-    {slideLinkUrl && <a href={slideLinkUrl} className={`${containerClass}__slide-link`}>подробнее об услуге</a>}
+    {(slideTitle || slideDescription || slideLinkUrl) && (
+    <div className={`${containerClass}__slide-overlay`}>
+      {slideTitle && <span className={`${containerClass}__slide-title`}>{slideTitle}</span>}
+      {slideDescription && <span className={`${containerClass}__slide-description`}>{slideDescription}</span>}
+      {slideLinkUrl && <a href={slideLinkUrl} className={`${containerClass}__slide-link`}>подробнее об услуге</a>}
+    </div>
+    )}
   </div>
 );
 
