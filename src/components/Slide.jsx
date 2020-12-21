@@ -4,7 +4,7 @@ import React from 'react';
 import { css, jsx } from '@emotion/core';
 
 const Slide = ({
-  width, containerClass, slide: {
+  width, margin, containerClass, slide: {
     slideImgUrl,
     slideTitle,
     slideDescription,
@@ -17,9 +17,10 @@ const Slide = ({
       height: 100%;
       width: ${width}px;
       background-image: url('${slideImgUrl}');
-      background-size: cover;
+      background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
+      margin-right: ${margin}px;
     `}
   >
     {(slideTitle || slideDescription || slideLinkUrl) && (

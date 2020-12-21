@@ -10,18 +10,18 @@ import Dots from './Dots.jsx';
 
 const Slider = (props) => {
   const {
-    slides, container, containerClass, autoPlay, withDots,
+    slides, container, containerClass, autoPlay, withDots, slidesToShow, margin,
   } = props;
-  const getWidth = () => container.clientWidth;
+  const getWidth = () => container.clientWidth / slidesToShow + margin / slidesToShow;
   const firstSlide = slides[0];
-  const secondSlide = slides[1];
+  /* const secondSlide = slides[1]; */
   const lastSlide = slides[slides.length - 1];
   const [state, setState] = useState({
     activeSlide: 0,
     displayedSlideId: firstSlide.id,
     translate: getWidth(),
     transition: 0.45,
-    _slides: [lastSlide, firstSlide, secondSlide],
+    _slides: [lastSlide, ...slides.slice(0, -1)],
   });
   const {
     activeSlide, displayedSlideId, translate, transition, _slides,
@@ -35,11 +35,11 @@ const Slider = (props) => {
   const smoothTransition = () => {
     let newSlides = [];
     if (activeSlide === slides.length - 1) {
-      newSlides = [slides[slides.length - 2], lastSlide, firstSlide];
+      newSlides = [...slides.slice(1), firstSlide];
     } else if (activeSlide === 0) {
-      newSlides = [lastSlide, firstSlide, secondSlide];
+      newSlides = [lastSlide, ...slides.slice(0, -1)];
     } else {
-      newSlides = slides.slice(activeSlide - 1, activeSlide + 2);
+      newSlides = [...slides.slice(activeSlide - 1), ...slides.slice(0, activeSlide - 1)];
     }
 
     setState({
@@ -63,7 +63,7 @@ const Slider = (props) => {
 
   const prevSlide = () => setState({
     ...state,
-    translate: 0,
+    translate: 0 + margin,
     activeSlide: activeSlide === 0 ? slides.length - 1 : activeSlide - 1,
   });
 
@@ -118,7 +118,7 @@ const Slider = (props) => {
   const sliderStyles = css`
     position: relative;
     height: 100%;
-    width: ${getWidth()}px;
+    width: ${getWidth() * slidesToShow}px;
     margin: 0 auto;
     overflow: hidden;
     white-space: nowrap;
@@ -129,11 +129,12 @@ const Slider = (props) => {
       <SlidesWrapper
         translate={translate}
         transition={transition}
-        width={getWidth() * slides.length}
+        width={getWidth() * _slides.length}
       >
         {_slides.map((slide) => (
           <Slide
-            width={getWidth()}
+            width={getWidth() - margin}
+            margin={margin}
             key={slide.key}
             slide={slide}
             containerClass={containerClass}

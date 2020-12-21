@@ -6,10 +6,11 @@ import Slider from './components/Slider.jsx';
 
 const sliders = [
   {
-    type: 'slider',
     containerClass: 'point',
     autoPlay: false,
     withDots: true,
+    slidesToShow: 2,
+    margin: 10,
     slides: [
       {
         id: 1,
@@ -36,32 +37,32 @@ const sliders = [
   },
 ];
 
-const prepareSlides = (slides) => {
-  const quantity = slides.length;
-  if (quantity === 1) {
-    return [...slides, ...slides, ...slides].map((slide, key) => ({ ...slide, key }));
-  } if (quantity === 2) {
-    return [...slides, ...slides].map((slide, key) => ({ ...slide, key }));
+const prepareSlides = (slides, slidesToShow) => {
+  if (slides.length > slidesToShow) {
+    return slides.map((slide, key) => ({ ...slide, key }));
   }
-  return slides.map((slide, key) => ({ ...slide, key }));
+  let preparedSlides = [];
+  while (preparedSlides.length <= slidesToShow + 1) {
+    preparedSlides = [...preparedSlides, ...slides].map((slide, key) => ({ ...slide, key }));
+  }
+  return preparedSlides;
 };
 
 sliders.forEach((slider) => {
-  const { type } = slider;
-  if (type === 'slider') {
-    const {
-      slides, containerClass, autoPlay, withDots,
-    } = slider;
+  const {
+    slides, containerClass, autoPlay, withDots, slidesToShow, margin,
+  } = slider;
     // eslint-disable-next-line no-undef
-    const container = document.querySelector(`.${containerClass}`);
-    ReactDOM.render(<Slider
-      slides={prepareSlides(slides)}
-      containerClass={containerClass}
-      container={container}
-      autoPlay={autoPlay}
-      withDots={withDots}
-    />, container);
-  }
+  const container = document.querySelector(`.${containerClass}`);
+  ReactDOM.render(<Slider
+    slides={prepareSlides(slides, slidesToShow)}
+    containerClass={containerClass}
+    container={container}
+    autoPlay={autoPlay}
+    withDots={withDots}
+    slidesToShow={slidesToShow}
+    margin={margin}
+  />, container);
 });
 
 /* const uri = document.location.pathname.substring(1);
