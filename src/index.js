@@ -9,8 +9,9 @@ const sliders = [
     containerClass: 'point',
     autoPlay: false,
     withDots: true,
-    slidesToShow: 2,
-    margin: 10,
+    slidesToShow: 1,
+    slideImgSize: 'contain', // contain or cover
+    margin: 0,
     slides: [
       {
         id: 1,
@@ -50,7 +51,7 @@ const prepareSlides = (slides, slidesToShow) => {
 
 sliders.forEach((slider) => {
   const {
-    slides, containerClass, autoPlay, withDots, slidesToShow, margin,
+    slides, containerClass, autoPlay, withDots, slidesToShow, slideImgSize, margin,
   } = slider;
     // eslint-disable-next-line no-undef
   const container = document.querySelector(`.${containerClass}`);
@@ -61,6 +62,7 @@ sliders.forEach((slider) => {
     autoPlay={autoPlay}
     withDots={withDots}
     slidesToShow={slidesToShow}
+    slideImgSize={slideImgSize}
     margin={margin}
   />, container);
 });

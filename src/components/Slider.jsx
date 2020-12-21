@@ -10,7 +10,7 @@ import Dots from './Dots.jsx';
 
 const Slider = (props) => {
   const {
-    slides, container, containerClass, autoPlay, withDots, slidesToShow, margin,
+    slides, container, containerClass, autoPlay, withDots, slidesToShow, slideImgSize, margin,
   } = props;
   const getWidth = () => container.clientWidth / slidesToShow + margin / slidesToShow;
   const firstSlide = slides[0];
@@ -137,6 +137,7 @@ const Slider = (props) => {
             margin={margin}
             key={slide.key}
             slide={slide}
+            slideImgSize={slideImgSize}
             containerClass={containerClass}
           />
         ))}
