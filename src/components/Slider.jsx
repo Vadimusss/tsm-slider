@@ -141,8 +141,8 @@ const Slider = (props) => {
           />
         ))}
       </SlidesWrapper>
-      <Arrow direction="left" handleClick={prevSlide} />
-      <Arrow direction="right" handleClick={nextSlide} />
+      <Arrow direction="left" containerClass={containerClass} handleClick={prevSlide} />
+      <Arrow direction="right" containerClass={containerClass} handleClick={nextSlide} />
 
       {withDots && <Dots slides={uniqBy(slides, 'id')} displayedSlideId={displayedSlideId} />}
     </div>
