@@ -1,16 +1,17 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /** @jsx jsx */
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
 import { css, jsx } from '@emotion/core';
 import leftArrow from '../img/left-arrow.svg';
 import rightArrow from '../img/right-arrow.svg';
 
 const Arrow = ({ direction, handleClick, containerClass }) => (
   <div
+    role="button"
+    tabIndex={0}
+    onKeyUp={handleClick}
+    className={`${containerClass}__${direction === 'right' ? 'right' : 'left'}-arrow`}
     onClick={handleClick}
     css={css`
+      outline: none;
       position: absolute;
       top: 50%;
       ${direction === 'right' ? 'right: 25px' : 'left: 25px'};
@@ -22,8 +23,8 @@ const Arrow = ({ direction, handleClick, containerClass }) => (
     `}
   >
     {direction === 'right'
-      ? <img className={`${containerClass}__left-arrow`} alt="slide left" src={rightArrow} />
-      : <img className={`${containerClass}__right-arrow`} alt="slide right" src={leftArrow} />}
+      ? <img alt="slide left" src={rightArrow} />
+      : <img alt="slide right" src={leftArrow} />}
   </div>
 );
 
