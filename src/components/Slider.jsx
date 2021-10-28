@@ -128,11 +128,16 @@ const Slider = (props) => {
   const sliderStyles = css`
     position: relative;
     height: 100%;
-    width: ${getWidth() * slidesToShow}px;
+    width: ${getWidth() * slidesDisplayedNow}px;
     margin: 0 auto;
+  `;
+
+  const innerStyles = css`
+    height: 100%;
+    width: 100%;
     overflow: hidden;
     white-space: nowrap;
-`;
+  `;
 
   return (
     <div css={sliderStyles} ref={sliderRef}>
