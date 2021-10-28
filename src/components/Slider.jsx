@@ -28,10 +28,8 @@ const Slider = (props) => {
   const displayedSlides = multipliedSlides.slice(0, slidesToShow);
   const lastSlide = multipliedSlides[slidesToShow];
 
-  const getWidth = () => container.clientWidth / slidesToShow + margin / slidesToShow;
-  const firstSlide = slides[0];
-  /* const secondSlide = slides[1]; */
-  const lastSlide = slides[slides.length - 1];
+  const getWidth = () => containerWidth / slidesDisplayedNow;
+
   const [state, setState] = useState({
     activeSlide: 0,
     displayedSlideId: firstSlide.id,
