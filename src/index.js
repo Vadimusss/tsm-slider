@@ -65,7 +65,6 @@ sliders.forEach((slider) => {
     responsive={responsive}
     slidesToShow={slidesToShow}
     slideImgSize={slideImgSize}
-    showLinkInModal={showLinkInModal}
     margin={margin}
   />, container);
 });
