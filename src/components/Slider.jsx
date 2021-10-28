@@ -31,12 +31,12 @@ const Slider = (props) => {
   const getWidth = () => containerWidth / slidesDisplayedNow;
 
   const [state, setState] = useState({
-    activeSlide: 0,
-    displayedSlideId: firstSlide.id,
+    currentSlideIndex: 0,
     translate: getWidth(),
     transition: 0.45,
-    _slides: [lastSlide, ...slides.slice(0, -1)],
+    _slides: [firstSlide, ...displayedSlides, lastSlide],
   });
+
   const {
     activeSlide, displayedSlideId, translate, transition, _slides,
   } = state;
