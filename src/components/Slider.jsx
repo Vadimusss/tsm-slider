@@ -38,7 +38,7 @@ const Slider = (props) => {
   });
 
   const {
-    activeSlide, displayedSlideId, translate, transition, _slides,
+    currentSlideIndex, translate, transition, _slides,
   } = state;
 
   const autoPlayRef = useRef();
