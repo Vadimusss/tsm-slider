@@ -10,8 +10,17 @@ import { getDisplayedSlidesQuantity, prepareSlidesToCarusel } from '../utils';
 
 const Slider = (props) => {
   const {
-    slides, container, containerClass, autoPlay, withDots, slidesToShow, slideImgSize, margin,
+    slides,
+    container,
+    containerClass,
+    autoPlay,
+    withDots,
+    responsive,
+    slidesToShow,
+    slideImgSize,
+    margin,
   } = props;
+
   const getWidth = () => container.clientWidth / slidesToShow + margin / slidesToShow;
   const firstSlide = slides[0];
   /* const secondSlide = slides[1]; */
