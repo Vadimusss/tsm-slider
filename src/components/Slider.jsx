@@ -84,6 +84,12 @@ const Slider = (props) => {
   });
 
   useEffect(() => {
+    autoPlayRef.current = nextSlide;
+    transitionRef.current = smoothTransition;
+    resizeRef.current = handleResize;
+  });
+
+  useEffect(() => {
     const slider = sliderRef.current;
 
     const play = () => {
