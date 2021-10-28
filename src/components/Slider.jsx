@@ -141,26 +141,28 @@ const Slider = (props) => {
 
   return (
     <div css={sliderStyles} ref={sliderRef}>
-      <SlidesWrapper
-        translate={translate}
-        transition={transition}
-        width={getWidth() * _slides.length}
-      >
-        {_slides.map((slide) => (
-          <Slide
-            width={getWidth() - margin}
-            margin={margin}
-            key={slide.key}
-            slide={slide}
-            slideImgSize={slideImgSize}
-            containerClass={containerClass}
-          />
-        ))}
-      </SlidesWrapper>
+      <div css={innerStyles}>
+        <SlidesWrapper
+          translate={translate}
+          transition={transition}
+          width={getWidth() * _slides.length}
+        >
+          {_slides.map((slide) => (
+            <Slide
+              width={getWidth() - margin * 2}
+              margin={margin}
+              key={slide.key}
+              slide={slide}
+              slideImgSize={slideImgSize}
+              containerClass={containerClass}
+            />
+          ))}
+        </SlidesWrapper>
+      </div>
       <Arrow direction="left" containerClass={containerClass} handleClick={prevSlide} />
       <Arrow direction="right" containerClass={containerClass} handleClick={nextSlide} />
 
-      {withDots && <Dots slides={uniqBy(slides, 'id')} displayedSlideId={displayedSlideId} />}
+      {withDots && <Dots slides={slides} currentSlideIndex={currentSlideIndex} />}
     </div>
   );
 };
