@@ -8,14 +8,13 @@ const Dot = ({ active }) => (
     css={css`
       padding: 8px;
       margin-right: 5px;
-      cursor: pointer;
       border-radius: 50%;
       background: ${active ? '#006eae' : '#08a0d4'};
     `}
   />
 );
 
-const Dots = ({ slides, displayedSlideId }) => (
+const Dots = ({ slides, currentSlideIndex }) => (
   <div
     css={css`
       position: absolute;
@@ -26,8 +25,8 @@ const Dots = ({ slides, displayedSlideId }) => (
       justify-content: center;
     `}
   >
-    {slides.map(({ id }) => (
-      <Dot key={id} active={displayedSlideId === id} />
+    {slides.map(({ id }, i) => (
+      <Dot key={id} active={currentSlideIndex === i} />
     ))}
   </div>
 );
