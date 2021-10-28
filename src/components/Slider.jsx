@@ -2,11 +2,11 @@
 /** @jsx jsx */
 import { useState, useEffect, useRef } from 'react';
 import { css, jsx } from '@emotion/core';
-import { uniqBy } from 'lodash';
 import SlidesWrapper from './SlidesWrapper.jsx';
 import Slide from './Slide.jsx';
 import Arrow from './Arrow.jsx';
 import Dots from './Dots.jsx';
+import { getDisplayedSlidesQuantity, prepareSlidesToCarusel } from '../utils';
 
 const Slider = (props) => {
   const {
