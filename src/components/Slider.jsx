@@ -71,8 +71,9 @@ const Slider = (props) => {
 
   const nextSlide = () => setState({
     ...state,
+    currentSlideIndex: (currentSlideIndex === multipliedSlides.length - 1)
+      ? 0 : currentSlideIndex + 1,
     translate: translate + getWidth(),
-    activeSlide: activeSlide === slides.length - 1 ? 0 : activeSlide + 1,
   });
 
   const prevSlide = () => setState({
