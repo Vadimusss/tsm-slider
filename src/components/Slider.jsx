@@ -78,14 +78,9 @@ const Slider = (props) => {
 
   const prevSlide = () => setState({
     ...state,
-    translate: 0 + margin,
-    activeSlide: activeSlide === 0 ? slides.length - 1 : activeSlide - 1,
-  });
-
-  useEffect(() => {
-    autoPlayRef.current = nextSlide;
-    transitionRef.current = smoothTransition;
-    resizeRef.current = handleResize;
+    currentSlideIndex: (currentSlideIndex === 0)
+      ? multipliedSlides.length - 1 : currentSlideIndex - 1,
+    translate: translate - getWidth(),
   });
 
   useEffect(() => {
