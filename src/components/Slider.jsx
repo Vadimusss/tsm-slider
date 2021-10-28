@@ -48,17 +48,17 @@ const Slider = (props) => {
 
   const smoothTransition = () => {
     let newSlides = [];
-    if (activeSlide === slides.length - 1) {
-      newSlides = [...slides.slice(1), firstSlide];
-    } else if (activeSlide === 0) {
-      newSlides = [lastSlide, ...slides.slice(0, -1)];
+    if (currentSlideIndex === 0) {
+      newSlides = [firstSlide, ...displayedSlides, lastSlide];
     } else {
-      newSlides = [...slides.slice(activeSlide - 1), ...slides.slice(0, activeSlide - 1)];
+      newSlides = [
+        ...multipliedSlides.slice(currentSlideIndex - 1),
+        ...multipliedSlides.slice(0, currentSlideIndex - 1),
+      ];
     }
 
     setState({
       ...state,
-      displayedSlideId: newSlides[1].id,
       transition: 0,
       translate: getWidth(),
       _slides: newSlides,
