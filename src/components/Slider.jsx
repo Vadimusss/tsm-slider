@@ -21,6 +21,13 @@ const Slider = (props) => {
     margin,
   } = props;
 
+  const containerWidth = container.clientWidth;
+  const slidesDisplayedNow = getDisplayedSlidesQuantity(slidesToShow, responsive, containerWidth);
+  const multipliedSlides = prepareSlidesToCarusel(slides, slidesToShow);
+  const firstSlide = multipliedSlides[multipliedSlides.length - 1];
+  const displayedSlides = multipliedSlides.slice(0, slidesToShow);
+  const lastSlide = multipliedSlides[slidesToShow];
+
   const getWidth = () => container.clientWidth / slidesToShow + margin / slidesToShow;
   const firstSlide = slides[0];
   /* const secondSlide = slides[1]; */
