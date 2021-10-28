@@ -43,31 +43,29 @@ const sliders = [
   },
 ];
 
-const prepareSlides = (slides, slidesToShow) => {
-  if (slides.length > slidesToShow) {
-    return slides.map((slide, key) => ({ ...slide, key }));
-  }
-  let preparedSlides = [];
-  while (preparedSlides.length <= slidesToShow + 1) {
-    preparedSlides = [...preparedSlides, ...slides].map((slide, key) => ({ ...slide, key }));
-  }
-  return preparedSlides;
-};
-
 sliders.forEach((slider) => {
   const {
-    slides, containerClass, autoPlay, withDots, slidesToShow, slideImgSize, margin,
+    slides,
+    containerClass,
+    autoPlay,
+    withDots,
+    slidesToShow,
+    responsive,
+    slideImgSize,
+    margin,
   } = slider;
-    // eslint-disable-next-line no-undef
+
   const container = document.querySelector(`.${containerClass}`);
   ReactDOM.render(<Slider
-    slides={prepareSlides(slides, slidesToShow)}
+    slides={slides}
     containerClass={containerClass}
     container={container}
     autoPlay={autoPlay}
     withDots={withDots}
+    responsive={responsive}
     slidesToShow={slidesToShow}
     slideImgSize={slideImgSize}
+    showLinkInModal={showLinkInModal}
     margin={margin}
   />, container);
 });
